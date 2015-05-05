@@ -5275,6 +5275,11 @@ new function () {// jshint ignore:line
         js: {
             load: function (name, req, onLoad) {
                 var url = req.url
+                //判断带~/ 直接跳转到根目录 防止子模块加载其他模块路径错误
+                if (req.url.indexOf("~") > -1)
+                {
+                    url = req.baseUrl + req.url.substr(req.url.indexOf("~") + 2, req.url.length - req.url.indexOf("~") + 2);
+                }
                 var id = req.urlNoQuery
                 var shim = kernel.shim[name.replace(rjsext, "")]
                 if (shim) { //shim机制
