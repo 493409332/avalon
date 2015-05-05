@@ -5315,6 +5315,10 @@ new function () {// jshint ignore:line
                         }
                     }
                 }
+                if (name.indexOf("~") > -1)
+                {
+                    url = req.baseUrl + name.replace('~/', '');
+                }
                 xhr.open("GET", url, true)
                 if ("withCredentials" in xhr) {//这是处理跨域
                     xhr.withCredentials = true
